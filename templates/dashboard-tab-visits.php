@@ -29,7 +29,11 @@
 
 				<?php foreach ( $visits as $visit ) : ?>
 					<tr>
-						<td><?php echo $visit->url; ?></td>
+						<td>
+							<a href="<?php echo esc_url( $visit->url ); ?>" title="<?php echo esc_attr( $visit->url ); ?>">
+								<?php echo affwp_make_url_human_readable( $visit->url ); ?>
+							</a>
+						</td>
 						<td><?php echo ! empty( $visit->referrer ) ? $visit->referrer : __( 'Direct traffic', 'affiliate-wp' ); ?></td>
 						<td>
 							<?php $converted = ! empty( $visit->referral_id ) ? 'yes' : 'no'; ?>
