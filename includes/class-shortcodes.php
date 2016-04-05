@@ -149,14 +149,8 @@ class Affiliate_WP_Shortcodes {
 		$atts = shortcode_atts( array(
 			'url'    => '',
 			'format' => '',
-			'pretty' => '',
-			'default_url' => ''
+			'pretty' => ''
 		), $atts, 'affiliate_referral_url' );
-
-		if ( ! ( affwp_is_affiliate() && affwp_is_active_affiliate() ) ) {
-			$default_url = isset( $atts['default_url'] ) ? $atts['default_url'] : '';
-			return $default_url;
-		}
 
 		// format
 		$format = isset( $atts['format'] ) ? $atts['format'] : '';
@@ -184,6 +178,10 @@ class Affiliate_WP_Shortcodes {
 			'format'   => $format,
 			'pretty'   => $pretty
 		);
+
+		if ( ! ( affwp_is_affiliate() && affwp_is_active_affiliate() ) ) {
+			$args['affiliate_id'] = isset( $_COOKIE['affwp_ref'] ) ? $_COOKIE['affwp_ref'] : '';
+		}
 
 		$content = affwp_get_affiliate_referral_url( $args );
 
