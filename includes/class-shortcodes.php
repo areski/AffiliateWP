@@ -146,15 +146,17 @@ class Affiliate_WP_Shortcodes {
 	 */
 	public function referral_url( $atts, $content = null ) {
 
-		if ( ! ( affwp_is_affiliate() && affwp_is_active_affiliate() ) ) {
-			return;
-		}
-
 		$atts = shortcode_atts( array(
 			'url'    => '',
 			'format' => '',
-			'pretty' => ''
+			'pretty' => '',
+			'default_url' => ''
 		), $atts, 'affiliate_referral_url' );
+
+		if ( ! ( affwp_is_affiliate() && affwp_is_active_affiliate() ) ) {
+			$default_url = isset( $atts['default_url'] ) ? $atts['default_url'] : '';
+			return $default_url;
+		}
 
 		// format
 		$format = isset( $atts['format'] ) ? $atts['format'] : '';
