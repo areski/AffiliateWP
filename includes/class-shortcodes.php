@@ -184,6 +184,9 @@ class Affiliate_WP_Shortcodes {
 		}
 
 		$content = affwp_get_affiliate_referral_url( $args );
+		if (strlen($args['affiliate_id']) > 0 && strpos($content, "ref")) {
+		        return $content."=".$args['affiliate_id'];
+		}
 
 		return $content;
 	}
